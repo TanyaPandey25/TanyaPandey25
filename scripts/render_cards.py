@@ -21,6 +21,7 @@ CONFIG = {
     "github": "https://github.com/TanyaPandey25",
     "linkedin": "https://www.linkedin.com/in/tanyapandey-dev/",
     "projects": "https://github.com/TanyaPandey25?tab=repositories",
+    "email": "pandeytanya2010@gmail.com",
     "portrait_url": "",
     "colors": {
         "bg": "#080916", "panel": "#111329", "panel2": "#171833",
@@ -150,7 +151,38 @@ def hero(fd):
 '''
     if CONFIG["portrait_url"]:
         s+=f'<circle cx="935" cy="170" r="74" fill="#111329"/><image href="{esc(CONFIG["portrait_url"])}" x="861" y="96" width="148" height="148" preserveAspectRatio="xMidYMid slice" clip-path="circle(74px at 935px 170px)"/>'
-    write("v4-01-hero.svg",s)
+    s+=f'<g transform="translate(76 218)"><circle cx="19" cy="19" r="17" fill="#75C8F5" fill-opacity=".13" stroke="#75C8F5" stroke-opacity=".8"/><text x="19" y="26" text-anchor="middle" font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#DDF5FF">in</text><circle cx="72" cy="19" r="17" fill="#D58AEF" fill-opacity=".13" stroke="#D58AEF" stroke-opacity=".8"/><path d="M62 13h20v13H62z M62 14l10 8 10-8" fill="none" stroke="#F2DFFF" stroke-width="1.8" stroke-linejoin="round"/></g>'
+    write("v5-01-hero.svg",s)
+def social_icons(fd):
+    for name,kind,color in [("linkedin","in","#75C8F5"),("email","mail","#D58AEF")]:
+        s=start_svg(64,64,f"{kind} contact link",0,fd)
+        if kind=="in":
+            s+=f'<circle cx="32" cy="32" r="28" fill="{color}" fill-opacity=".14" stroke="{color}" stroke-width="2"/><text x="32" y="41" text-anchor="middle" font-size="27" font-weight="800">in</text>'
+        else:
+            s+=f'<circle cx="32" cy="32" r="28" fill="{color}" fill-opacity=".14" stroke="{color}" stroke-width="2"/><rect x="16" y="21" width="32" height="22" rx="3" fill="none" stroke="#F2DFFF" stroke-width="2"/><path d="M17 23l15 12 15-12" fill="none" stroke="#F2DFFF" stroke-width="2"/>'
+        write(f"v5-{name}-icon.svg",s)
+def tech_stack(fd):
+    groups=[
+        ("LANGUAGES",["JAVA","C","C++","PYTHON","JAVASCRIPT","HTML5","CSS3"]),
+        ("FRAMEWORKS & RUNTIME",["REACT","VITE","NODE.JS","EXPRESS","FASTAPI"]),
+        ("DATABASES",["MONGODB","SQL"]),
+        ("TOOLS",["GIT","GITHUB","VS CODE","INTELLIJ IDEA"]),
+        ("CLOUD & XR",["GOOGLE CLOUD","UNITY","C#","AR FOUNDATION"])
+    ]
+    palette=["#9B6CFF","#75C8F5","#D58AEF","#8B83FF","#6F9CFF","#B28BFF","#75C8F5"]
+    s=start_svg(1100,390,"Technology stack",1,fd)
+    s+=f'<ellipse class="glow" cx="930" cy="20" rx="220" ry="100" fill="#6738B8" opacity=".22" filter="url(#blur)"/>{panel(2,2,1096,386,25)}<text x="52" y="57" class="kicker">TECH STACK</text><text x="50" y="103" class="serif" font-size="48">Tools I work with.</text>'
+    y=145
+    for gi,(heading,items) in enumerate(groups):
+        s+=f'<text x="55" y="{y}" font-size="13" font-weight="800" letter-spacing="2.1" fill="#B3B2CE">{heading}</text>'
+        x=300
+        for j,item in enumerate(items):
+            width=max(74,len(item)*10+30)
+            accent=palette[(gi+j)%len(palette)]
+            s+=f'<rect x="{x}" y="{y-24}" width="{width}" height="34" rx="9" fill="{accent}" fill-opacity=".16" stroke="{accent}" stroke-opacity=".62"/><circle cx="{x+15}" cy="{y-7}" r="4" fill="{accent}"/><text x="{x+27}" y="{y}" font-size="14" font-weight="800" letter-spacing=".7">{esc(item)}</text>'
+            x+=width+10
+        y+=53
+    write("v5-02-tech-stack.svg",s)
 def links(fd):
     tiles=[("github","GITHUB","Code & experiments","GH","#9B6CFF"),("linkedin","LINKEDIN","Let’s connect","in","#75C8F5"),("projects","PROJECTS","Things I’m building","↗","#D58AEF")]
     for slug,title,sub,mark,accent in tiles:
@@ -181,7 +213,7 @@ def repo_card(repo,i,fd):
 <text x="60" y="198" font-size="19" fill="#D0CDE5">{esc(lines[1])}</text>
 <text x="60" y="235" font-size="15" font-weight="700" fill="#A9A6C8">{esc(repo["stack"])}</text>
 '''
-    write(f"v4-04-project-{i:02d}-{slug}.svg",s)
+    write(f"v5-04-project-{i:02d}-{slug}.svg",s)
 def contribution_graph(data,fd):
     weeks=data.get("weeks",[])
     s=start_svg(1100,300,"Animated GitHub contribution calendar",6,fd)
@@ -207,12 +239,12 @@ def contribution_graph(data,fd):
 <animate class="smil" attributeName="opacity" values=".10;1;.52;1;.10" keyTimes="0;.22;.56;.82;1" dur="7.2s" begin="{delay:.3f}s" repeatCount="indefinite"/>
 </rect>'''
     else: s+='<text x="65" y="180" class="body">Contribution data will appear after the next refresh.</text>'
-    write("v4-99-contributions.svg",s)
+    write("v5-99-contributions.svg",s)
 def main():
     parser=argparse.ArgumentParser(); parser.add_argument("--refresh",action="store_true"); args=parser.parse_args()
     data=refresh_data() if args.refresh else read_data(); fd=fonts()
     CARDS.mkdir(parents=True,exist_ok=True)
-    hero(fd); links(fd)
+    hero(fd); social_icons(fd); tech_stack(fd)
     for i,repo in enumerate(CONFIG["repos"],1): repo_card(repo,i,fd)
     contribution_graph(data,fd)
     print(f"Rendered {len(list(CARDS.glob('*.svg')))} SVG cards in {CARDS}")
