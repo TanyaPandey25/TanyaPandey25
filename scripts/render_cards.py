@@ -182,7 +182,7 @@ text{{font-family:DM,'Arial',sans-serif;fill:var(--ink)}}
 .kicker{{font-size:14px;font-weight:700;letter-spacing:2.5px;fill:var(--muted)}}
 .label{{font-size:14px;font-weight:700;letter-spacing:1.4px;fill:var(--muted)}}
 .body{{font-size:19px;fill:var(--deep)}}
-.card-motion{{opacity:1;transform:translateY(0);animation:rise .85s cubic-bezier(.2,.7,.2,1) both;animation-delay:{index * 0.42:.2f}s}}
+.card-motion{{opacity:1;transform:translateY(0);animation:{"none" if STATIC else "rise .85s cubic-bezier(.2,.7,.2,1) both"};animation-delay:{0 if STATIC else index * 0.42:.2f}s}}
 @keyframes rise{{from{{opacity:0;transform:translateY(20px)}}to{{opacity:1;transform:translateY(0)}}}}
 @media(prefers-reduced-motion:reduce){{.card-motion{{animation:none!important;opacity:1!important;transform:none!important}}.smil{{display:none!important}}}}
 </style>
@@ -222,22 +222,23 @@ def hero(fonts: tuple[str, str]) -> None:
 
 
 def links(fonts: tuple[str, str]) -> None:
+    """Create three independent tiles; README wraps each SVG in its own link."""
     c = CONFIG["colors"]
-    tiles = [("GITHUB", "Code, projects & experiments", CONFIG["github"], "GH"),
-             ("LINKEDIN", "Connect professionally", CONFIG["linkedin"], "in"),
-             (CONFIG["third_label"], "Explore what I'm building", CONFIG["third_link"], "↗")]
-    s = svg_start(1000, 184, "Find Tanya online", 1, fonts)
-    for i, (title, subtitle, url, mark) in enumerate(tiles):
-        x = 22 + i * 326
-        s += f'''<a href="{esc(url)}" target="_blank">
-<rect x="{x}" y="20" width="310" height="144" rx="18" fill="{c["soft"]}" stroke="{c["line"]}"/>
-<circle cx="{x+43}" cy="65" r="22" fill="{c["deep"]}"/>
-<text x="{x+43}" y="72" text-anchor="middle" font-size="18" font-weight="700" fill="{c["paper"]}">{esc(mark)}</text>
-<text x="{x+25}" y="112" font-size="17" font-weight="800" letter-spacing="1.3">{esc(title)}</text>
-<text x="{x+25}" y="139" font-size="13" fill="{c["muted"]}">{esc(subtitle)}</text>
-</a>'''
-    s += svg_end(); write_svg("02-links.svg", s)
-
+    tiles = [
+        ("github", "GITHUB", "Code, projects & experiments", CONFIG["github"], "GH"),
+        ("linkedin", "LINKEDIN", "Connect professionally", CONFIG["linkedin"], "in"),
+        ("projects", CONFIG["third_label"], "Explore what I'm building", CONFIG["third_link"], "↗"),
+    ]
+    for i, (slug, title, subtitle, url, mark) in enumerate(tiles):
+        x = 24
+        card = svg_start(310, 144, title, 1, fonts)
+        card += f'''<rect x="1" y="1" width="308" height="142" rx="18" fill="{c["soft"]}" stroke="{c["line"]}"/>
+<circle cx="45" cy="45" r="22" fill="{c["deep"]}"/>
+<text x="45" y="52" text-anchor="middle" font-size="18" font-weight="700" fill="{c["paper"]}">{esc(mark)}</text>
+<text x="24" y="92" font-size="17" font-weight="800" letter-spacing="1.3">{esc(title)}</text>
+<text x="24" y="119" font-size="13" fill="{c["muted"]}">{esc(subtitle)}</text>'''
+        card += svg_end()
+        write_svg(f"02-{slug}.svg", card)
 
 def analytics(data: dict, fonts: tuple[str, str]) -> None:
     c = CONFIG["colors"]; months = data.get("months", [])[-12:]
@@ -253,8 +254,7 @@ def analytics(data: dict, fonts: tuple[str, str]) -> None:
         y = 302 - h
         s += f'''<rect x="{x}" y="168" width="42" height="134" rx="8" fill="{c["soft"]}"/>
 <rect x="{x}" y="{y}" width="42" height="{h}" rx="8" fill="{c["jade"]}">
-<animate class="smil" attributeName="height" from="0" to="{h}" dur=".9s" begin="{1.1+i*.055:.2f}s" fill="freeze"/>
-<animate class="smil" attributeName="y" from="302" to="{y}" dur=".9s" begin="{1.1+i*.055:.2f}s" fill="freeze"/>
+{"" if STATIC else f'<animate class="smil" attributeName="height" from="0" to="{h}" dur=".9s" begin="{1.1+i*.055:.2f}s" fill="freeze"/><animate class="smil" attributeName="y" from="302" to="{y}" dur=".9s" begin="{1.1+i*.055:.2f}s" fill="freeze"/>'}
 </rect>
 <text x="{x+21}" y="326" text-anchor="middle" font-size="12" fill="{c["muted"]}">{esc(m.get("label",""))}</text>'''
     metrics = [("CURRENT STREAK", f'{int(data.get("streak",0))} days'),
