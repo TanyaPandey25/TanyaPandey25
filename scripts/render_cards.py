@@ -139,7 +139,7 @@ def hero(fd):
         s+=f'<circle cx="900" cy="182" r="82" fill="#111329"/><image href="{esc(CONFIG["portrait_url"])}" x="818" y="100" width="164" height="164" preserveAspectRatio="xMidYMid slice" clip-path="circle(82px at 900px 182px)"/>'
     else:
         s+='<text x="900" y="211" text-anchor="middle" class="serif" font-size="76" fill="#E5D7FF">TP</text>'
-    write("01-hero.svg",s)
+    write("v2-01-hero.svg",s)
 def links(fd):
     tiles=[("github","GITHUB","Code & experiments","GH","#9B6CFF"),("linkedin","LINKEDIN","Let’s connect","in","#75C8F5"),("projects","PROJECTS","Things I’m building","↗","#D58AEF")]
     for i,(slug,title,sub,mark,accent) in enumerate(tiles):
@@ -152,7 +152,7 @@ def links(fd):
 <text x="30" y="142" font-size="15" fill="#B3B2CE">{sub}</text>
 <path d="M276 130 l18 0 l0 -18" fill="none" stroke="{accent}" stroke-width="2.2" stroke-linecap="round"/>
 '''
-        write(f"02-{slug}.svg",s)
+        write(f"v2-02-{slug}.svg",s)
 def analytics(data,fd):
     c=CONFIG["colors"]; months=data.get("months",[])[-12:]; months=[{"label":"—","count":0}]*(12-len(months))+months
     maximum=max([int(m.get("count",0)) for m in months]+[1])
@@ -172,7 +172,7 @@ def analytics(data,fd):
     for i,(label,value) in enumerate(metrics):
         x=58+i*340
         s+=f'<text x="{x}" y="393" font-size="14" font-weight="800" letter-spacing="1.5" fill="#B3B2CE">{label}</text><text x="{x+190}" y="393" font-size="23" font-weight="800" fill="#F4F1FF">{esc(value)}</text>'
-    write("03-activity.svg",s)
+    write("v2-03-activity.svg",s)
 def repo_card(repo,i,fd):
     c=repo["accent"]; slug=re.sub("[^a-z0-9]+","-",repo["name"].lower()).strip("-")
     s=start_svg(1100,270,f'{repo["name"]} featured project',3+i,fd)
@@ -185,7 +185,7 @@ def repo_card(repo,i,fd):
 <rect x="890" y="174" width="150" height="52" rx="26" fill="{c}" fill-opacity=".17" stroke="{c}" stroke-opacity=".75"/>
 <text x="965" y="207" text-anchor="middle" font-size="16" font-weight="800" letter-spacing="1">EXPLORE  ↗</text>
 '''
-    write(f"04-project-{i:02d}-{slug}.svg",s)
+    write(f"v2-04-project-{i:02d}-{slug}.svg",s)
 def contribution_graph(data,fd):
     c=CONFIG["colors"]; weeks=data.get("weeks",[])
     s=start_svg(1100,330,"Animated GitHub contribution calendar",6,fd)
@@ -214,7 +214,7 @@ def contribution_graph(data,fd):
     s+='<text x="65" y="294" font-size="14" fill="#B3B2CE">LESS</text>'
     for i,fill in enumerate(["#24243D","#49316F","#68439D","#8B5DCE","#B28BFF"]): s+=f'<rect x="{120+i*22}" y="281" width="15" height="15" rx="4" fill="{fill}"/>'
     s+='<text x="245" y="294" font-size="14" fill="#B3B2CE">MORE</text>'
-    write("99-contributions.svg",s)
+    write("v2-99-contributions.svg",s)
 def main():
     parser=argparse.ArgumentParser(); parser.add_argument("--refresh",action="store_true"); args=parser.parse_args()
     data=refresh_data() if args.refresh else read_data(); fd=fonts()
