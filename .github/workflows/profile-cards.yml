@@ -1,0 +1,39 @@
+name: Refresh profile cards
+
+on:
+  schedule:
+    - cron: "17 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out profile repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install font subsetting tools
+        run: python -m pip install --upgrade fonttools brotli
+
+      - name: Refresh contribution data and render SVG cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/render_cards.py --refresh
+
+      - name: Commit updated contribution data and cards
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/contributions.json cards/
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: refresh animated profile cards"
+            git push
+          fi
