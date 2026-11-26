@@ -140,7 +140,7 @@ def hero(fd):
 {"" if STATIC else '<animate class="smil" attributeName="opacity" values="1;1;0;0;1" dur=".85s" repeatCount="indefinite"/>'}
 </rect>
 <text x="74" y="166" font-size="25" font-weight="600" letter-spacing="2.2" fill="#D9D3F3">Computer science undergrad</text>
-<text x="74" y="222" class="small">BMSCE  ·  COMPUTER SCIENCE</text>
+
 <circle cx="935" cy="170" r="124" fill="none" stroke="#A77BFF" stroke-opacity=".25" stroke-width="1.2"/>
 <circle cx="935" cy="170" r="98" fill="#FFFFFF" fill-opacity=".025" stroke="url(#edge)" stroke-opacity=".55"/>
 <circle cx="935" cy="170" r="74" fill="#7044B6" fill-opacity=".16" filter="url(#blur)">
