@@ -111,11 +111,11 @@ text{{font-family:Manrope,Arial,sans-serif;fill:var(--white)}}
 </defs>
 <rect width="{w}" height="{h}" rx="28" fill="url(#bg)"/>
 <ellipse cx="{w*.82:.0f}" cy="{h*.15:.0f}" rx="{w*.19:.0f}" ry="{h*.28:.0f}" fill="#7548C5" filter="url(#blur)" opacity=".13">
- <animate class="smil" attributeName="opacity" values=".10;.34;.10" dur="8s" repeatCount="indefinite"/>
+ {"" if STATIC else '<animate class="smil" attributeName="opacity" values=".10;.34;.10" dur="8s" repeatCount="indefinite"/>'}
 </ellipse>
 <g class="card">
-<animate class="smil" attributeName="opacity" values="0;1" dur=".85s" begin="{0 if STATIC else order*.28:.2f}s" fill="freeze"/>
-<animateTransform class="smil" attributeName="transform" type="translate" values="0 18;0 0" dur=".85s" begin="{0 if STATIC else order*.28:.2f}s" fill="freeze"/>
+{"" if STATIC else f'<animate class="smil" attributeName="opacity" values="0;1" dur=".85s" begin="{order*.28:.2f}s" fill="freeze"/>'}
+{"" if STATIC else f'<animateTransform class="smil" attributeName="transform" type="translate" values="0 18;0 0" dur=".85s" begin="{order*.28:.2f}s" fill="freeze"/>'}
 '''
 def panel(x,y,w,h,rx=24):
     return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="#FFFFFF" fill-opacity=".045" stroke="url(#edge)" stroke-opacity=".56" stroke-width="1.5" filter="url(#glass)"/>'
@@ -125,26 +125,26 @@ def write(name,s):
 def hero(fd):
     s=start_svg(1100,330,"Tanya Pandey — computer science undergrad",0,fd)
     s+=f'''<ellipse cx="930" cy="55" rx="205" ry="135" fill="#6535B7" opacity=".28" filter="url(#blur)">
-<animate class="smil" attributeName="opacity" values=".12;.42;.12" dur="7.5s" repeatCount="indefinite"/>
+{"" if STATIC else '<animate class="smil" attributeName="opacity" values=".12;.42;.12" dur="7.5s" repeatCount="indefinite"/>'}
 </ellipse>
 <ellipse cx="780" cy="325" rx="190" ry="90" fill="#3456C8" opacity=".19" filter="url(#blur)">
-<animate class="smil" attributeName="opacity" values=".08;.32;.08" dur="9s" repeatCount="indefinite"/>
+{"" if STATIC else '<animate class="smil" attributeName="opacity" values=".08;.32;.08" dur="9s" repeatCount="indefinite"/>'}
 </ellipse>
 <path d="M710 0 C790 110 770 220 1100 260" fill="none" stroke="#9B6CFF" stroke-opacity=".2" stroke-width="1.5"/>
 <defs><clipPath id="nameClip"><rect x="64" y="0" width="0" height="125">
-<animate class="smil" attributeName="width" values="0;44;88;132;176;220;264;308;352;396;440;484;528;528;528;484;440;396;352;308;264;220;176;132;88;44;0;0" calcMode="discrete" dur="7.2s" repeatCount="indefinite"/>
+{"" if STATIC else '<animate class="smil" attributeName="width" values="0;44;88;132;176;220;264;308;352;396;440;484;528;528;528;484;440;396;352;308;264;220;176;132;88;44;0;0" calcMode="discrete" dur="7.2s" repeatCount="indefinite"/>'}
 </rect></clipPath></defs>
 <text x="70" y="100" class="serif" font-size="91" font-weight="600" letter-spacing="-2" clip-path="url(#nameClip)">{esc(CONFIG['name'])}</text>
 <rect x="66" y="28" width="4" height="82" rx="2" fill="#D9C5FF">
-<animate class="smil" attributeName="x" values="66;110;154;198;242;286;330;374;418;462;506;550;594;594;594;550;506;462;418;374;330;286;242;198;154;110;66;66" calcMode="discrete" dur="7.2s" repeatCount="indefinite"/>
-<animate class="smil" attributeName="opacity" values="1;1;0;0;1" dur=".85s" repeatCount="indefinite"/>
+{"" if STATIC else '<animate class="smil" attributeName="x" values="66;110;154;198;242;286;330;374;418;462;506;550;594;594;594;550;506;462;418;374;330;286;242;198;154;110;66;66" calcMode="discrete" dur="7.2s" repeatCount="indefinite"/>'}
+{"" if STATIC else '<animate class="smil" attributeName="opacity" values="1;1;0;0;1" dur=".85s" repeatCount="indefinite"/>'}
 </rect>
 <text x="74" y="166" font-size="25" font-weight="600" letter-spacing="2.2" fill="#D9D3F3">Computer science undergrad</text>
 <text x="74" y="222" class="small">BMSCE  ·  COMPUTER SCIENCE</text>
 <circle cx="935" cy="170" r="124" fill="none" stroke="#A77BFF" stroke-opacity=".25" stroke-width="1.2"/>
 <circle cx="935" cy="170" r="98" fill="#FFFFFF" fill-opacity=".025" stroke="url(#edge)" stroke-opacity=".55"/>
 <circle cx="935" cy="170" r="74" fill="#7044B6" fill-opacity=".16" filter="url(#blur)">
-<animate class="smil" attributeName="r" values="68;78;68" dur="6s" repeatCount="indefinite"/>
+{"" if STATIC else '<animate class="smil" attributeName="r" values="68;78;68" dur="6s" repeatCount="indefinite"/>'}
 </circle>
 <text x="935" y="197" text-anchor="middle" class="serif" font-size="72" fill="#E5D7FF">TP</text>
 '''
