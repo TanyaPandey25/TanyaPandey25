@@ -95,13 +95,10 @@ text{{font-family:Manrope,Arial,sans-serif;fill:var(--white)}}
 .kicker{{font-size:15px;font-weight:800;letter-spacing:3px;fill:{c['cyan']}}}
 .body{{font-size:22px;fill:{c['muted']}}}
 .small{{font-size:16px;fill:{c['muted']}}}
-.card{{opacity:1;animation:{'none' if STATIC else 'rise .9s cubic-bezier(.2,.75,.2,1) both'};animation-delay:{0 if STATIC else order*.34:.2f}s}}
-.glow{{animation:{'none' if STATIC else 'breathe 7s ease-in-out infinite alternate'}}}
-.sheen{{animation:{'none' if STATIC else 'sheen 8s ease-in-out infinite'}}}
-@keyframes rise{{from{{opacity:0;transform:translateY(22px)}}to{{opacity:1;transform:translateY(0)}}}}
-@keyframes breathe{{from{{opacity:.22}}to{{opacity:.62}}}}
-@keyframes sheen{{0%,100%{{opacity:.12}}50%{{opacity:.34}}}}
-@media(prefers-reduced-motion:reduce){{.card,.glow,.sheen{{animation:none!important;opacity:1!important;transform:none!important}}.smil{{display:none!important}}}}
+.card{{opacity:1}}
+.glow{{opacity:.3}}
+.smil{{}}
+@media(prefers-reduced-motion:reduce){{.smil{{display:none!important}}}}
 """
     return f'''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="{esc(title)}">
 <title>{esc(title)}</title><style>{css}</style>
@@ -113,7 +110,12 @@ text{{font-family:Manrope,Arial,sans-serif;fill:var(--white)}}
  <filter id="glass"><feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur"/><feSpecularLighting in="blur" surfaceScale="3" specularConstant=".35" specularExponent="18" lighting-color="#FFFFFF" result="spec"><fePointLight x="0" y="-100" z="180"/></feSpecularLighting><feComposite in="spec" in2="SourceAlpha" operator="in" result="shine"/><feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="shine"/></feMerge></filter>
 </defs>
 <rect width="{w}" height="{h}" rx="28" fill="url(#bg)"/>
+<ellipse cx="{w*.82:.0f}" cy="{h*.15:.0f}" rx="{w*.19:.0f}" ry="{h*.28:.0f}" fill="#7548C5" filter="url(#blur)" opacity=".13">
+ <animate class="smil" attributeName="opacity" values=".10;.34;.10" dur="8s" repeatCount="indefinite"/>
+</ellipse>
 <g class="card">
+<animate class="smil" attributeName="opacity" values="0;1" dur=".85s" begin="{0 if STATIC else order*.28:.2f}s" fill="freeze"/>
+<animateTransform class="smil" attributeName="transform" type="translate" values="0 18;0 0" dur=".85s" begin="{0 if STATIC else order*.28:.2f}s" fill="freeze"/>
 '''
 def panel(x,y,w,h,rx=24):
     return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="#FFFFFF" fill-opacity=".045" stroke="url(#edge)" stroke-opacity=".56" stroke-width="1.5" filter="url(#glass)"/>'
@@ -122,27 +124,33 @@ def write(name,s):
     CARDS.mkdir(parents=True,exist_ok=True); (CARDS/name).write_text(s+end_svg(),encoding="utf-8")
 def hero(fd):
     s=start_svg(1100,330,"Tanya Pandey — computer science undergrad",0,fd)
-    s+=f'''<ellipse class="glow" cx="930" cy="55" rx="205" ry="135" fill="#6535B7" opacity=".40" filter="url(#blur)"/>
-<ellipse class="glow" cx="780" cy="325" rx="190" ry="90" fill="#3456C8" opacity=".25" filter="url(#blur)"/>
+    s+=f'''<ellipse cx="930" cy="55" rx="205" ry="135" fill="#6535B7" opacity=".28" filter="url(#blur)">
+<animate class="smil" attributeName="opacity" values=".12;.42;.12" dur="7.5s" repeatCount="indefinite"/>
+</ellipse>
+<ellipse cx="780" cy="325" rx="190" ry="90" fill="#3456C8" opacity=".19" filter="url(#blur)">
+<animate class="smil" attributeName="opacity" values=".08;.32;.08" dur="9s" repeatCount="indefinite"/>
+</ellipse>
 <path d="M710 0 C790 110 770 220 1100 260" fill="none" stroke="#9B6CFF" stroke-opacity=".2" stroke-width="1.5"/>
-<text x="70" y="92" class="serif" font-size="91" font-weight="600" letter-spacing="-2" clip-path="url(#nameClip)">{esc(CONFIG['name'])}</text>
-<defs><clipPath id="nameClip"><rect x="64" y="0" width="0" height="210">
-<animate attributeName="width" values="0;660;660;0;0" keyTimes="0;.40;.58;.94;1" dur="6.8s" repeatCount="indefinite"/>
+<defs><clipPath id="nameClip"><rect x="64" y="0" width="0" height="125">
+<animate class="smil" attributeName="width" values="0;44;88;132;176;220;264;308;352;396;440;484;528;528;528;484;440;396;352;308;264;220;176;132;88;44;0;0" calcMode="discrete" dur="7.2s" repeatCount="indefinite"/>
 </rect></clipPath></defs>
-<rect x="66" y="25" width="4" height="82" rx="2" fill="#D9C5FF">
-<animate attributeName="x" values="66;710;710;66;66" keyTimes="0;.40;.58;.94;1" dur="6.8s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;.38;.40;.94;1" dur="6.8s" repeatCount="indefinite"/>
+<text x="70" y="100" class="serif" font-size="91" font-weight="600" letter-spacing="-2" clip-path="url(#nameClip)">{esc(CONFIG['name'])}</text>
+<rect x="66" y="28" width="4" height="82" rx="2" fill="#D9C5FF">
+<animate class="smil" attributeName="x" values="66;110;154;198;242;286;330;374;418;462;506;550;594;594;594;550;506;462;418;374;330;286;242;198;154;110;66;66" calcMode="discrete" dur="7.2s" repeatCount="indefinite"/>
+<animate class="smil" attributeName="opacity" values="1;1;0;0;1" dur=".85s" repeatCount="indefinite"/>
 </rect>
-<text x="74" y="158" font-size="25" font-weight="600" letter-spacing="2.2" fill="#D9D3F3">Computer science undergrad</text>
-<text x="74" y="218" class="small">BMSCE  ·  COMPUTER SCIENCE</text>
+<text x="74" y="166" font-size="25" font-weight="600" letter-spacing="2.2" fill="#D9D3F3">Computer science undergrad</text>
+<text x="74" y="222" class="small">BMSCE  ·  COMPUTER SCIENCE</text>
 <circle cx="935" cy="170" r="124" fill="none" stroke="#A77BFF" stroke-opacity=".25" stroke-width="1.2"/>
 <circle cx="935" cy="170" r="98" fill="#FFFFFF" fill-opacity=".025" stroke="url(#edge)" stroke-opacity=".55"/>
-<circle class="glow" cx="935" cy="170" r="74" fill="#7044B6" fill-opacity=".16" filter="url(#blur)"/>
+<circle cx="935" cy="170" r="74" fill="#7044B6" fill-opacity=".16" filter="url(#blur)">
+<animate class="smil" attributeName="r" values="68;78;68" dur="6s" repeatCount="indefinite"/>
+</circle>
 <text x="935" y="197" text-anchor="middle" class="serif" font-size="72" fill="#E5D7FF">TP</text>
 '''
     if CONFIG["portrait_url"]:
         s+=f'<circle cx="935" cy="170" r="74" fill="#111329"/><image href="{esc(CONFIG["portrait_url"])}" x="861" y="96" width="148" height="148" preserveAspectRatio="xMidYMid slice" clip-path="circle(74px at 935px 170px)"/>'
-    write("v3-01-hero.svg",s)
+    write("v4-01-hero.svg",s)
 def links(fd):
     tiles=[("github","GITHUB","Code & experiments","GH","#9B6CFF"),("linkedin","LINKEDIN","Let’s connect","in","#75C8F5"),("projects","PROJECTS","Things I’m building","↗","#D58AEF")]
     for slug,title,sub,mark,accent in tiles:
@@ -155,7 +163,7 @@ def links(fd):
 <text x="30" y="142" font-size="15" fill="#B3B2CE">{sub}</text>
 <path d="M276 130 l18 0 l0 -18" fill="none" stroke="{accent}" stroke-width="2.2" stroke-linecap="round"/>
 '''
-        write(f"v3-02-{slug}.svg",s)
+        write(f"v4-02-{slug}.svg",s)
 def analytics(data,fd):
     c=CONFIG["colors"]; months=data.get("months",[])[-12:]; months=[{"label":"—","count":0}]*(12-len(months))+months
     maximum=max([int(m.get("count",0)) for m in months]+[1])
@@ -175,7 +183,7 @@ def analytics(data,fd):
     for i,(label,value) in enumerate(metrics):
         x=58+i*340
         s+=f'<text x="{x}" y="393" font-size="14" font-weight="800" letter-spacing="1.5" fill="#B3B2CE">{label}</text><text x="{x+190}" y="393" font-size="23" font-weight="800" fill="#F4F1FF">{esc(value)}</text>'
-    write("v2-03-activity.svg",s)
+    write("v4-03-activity.svg",s)
 def repo_card(repo,i,fd):
     accent=repo["accent"]; slug=re.sub("[^a-z0-9]+","-",repo["name"].lower()).strip("-")
     description=repo["description"]
@@ -193,7 +201,7 @@ def repo_card(repo,i,fd):
 <text x="60" y="198" font-size="19" fill="#D0CDE5">{esc(lines[1])}</text>
 <text x="60" y="235" font-size="15" font-weight="700" fill="#A9A6C8">{esc(repo["stack"])}</text>
 '''
-    write(f"v3-04-project-{i:02d}-{slug}.svg",s)
+    write(f"v4-04-project-{i:02d}-{slug}.svg",s)
 def contribution_graph(data,fd):
     weeks=data.get("weeks",[])
     s=start_svg(1100,300,"Animated GitHub contribution calendar",6,fd)
@@ -216,10 +224,10 @@ def contribution_graph(data,fd):
                     delay=wi*.075+wd*.035
                     s+=f'''<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="4" fill="{fills[level]}" opacity=".08">
 <title>{esc(day.get("date",""))}: {count} contributions</title>
-<animate class="smil" attributeName="opacity" values=".08;1;.55;1" keyTimes="0;.18;.68;1" dur="6.2s" begin="{delay:.3f}s" repeatCount="indefinite"/>
+<animate class="smil" attributeName="opacity" values=".10;1;.52;1;.10" keyTimes="0;.22;.56;.82;1" dur="7.2s" begin="{delay:.3f}s" repeatCount="indefinite"/>
 </rect>'''
     else: s+='<text x="65" y="180" class="body">Contribution data will appear after the next refresh.</text>'
-    write("v3-99-contributions.svg",s)
+    write("v4-99-contributions.svg",s)
 def main():
     parser=argparse.ArgumentParser(); parser.add_argument("--refresh",action="store_true"); args=parser.parse_args()
     data=refresh_data() if args.refresh else read_data(); fd=fonts()
