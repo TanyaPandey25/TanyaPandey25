@@ -1,12 +1,12 @@
-<!-- Profile README: each card is a standalone SVG. -->
+<!-- Dark editorial / glassmorphic profile README. Each image is a self-contained SVG. -->
 <p align="center">
-  <img src="cards/01-hero.svg" alt="Tanya Pandey — developer profile" width="100%" />
+  <img src="cards/01-hero.svg" alt="Tanya Pandey — computer science developer profile" width="100%" />
 </p>
 
 <p align="center">
-  <a href="https://github.com/TanyaPandey25"><img src="cards/02-github.svg" alt="GitHub: code, projects and experiments" width="32.5%" /></a>
-  <a href="https://www.linkedin.com/in/tanyapandey-dev/"><img src="cards/02-linkedin.svg" alt="LinkedIn: connect professionally" width="32.5%" /></a>
-  <a href="https://github.com/TanyaPandey25?tab=repositories"><img src="cards/02-projects.svg" alt="Projects: explore what I'm building" width="32.5%" /></a>
+  <a href="https://github.com/TanyaPandey25"><img src="cards/02-github.svg" alt="GitHub — code and experiments" width="32.5%" /></a>
+  <a href="https://www.linkedin.com/in/tanyapandey-dev/"><img src="cards/02-linkedin.svg" alt="LinkedIn — connect" width="32.5%" /></a>
+  <a href="https://github.com/TanyaPandey25?tab=repositories"><img src="cards/02-projects.svg" alt="Projects — things I'm building" width="32.5%" /></a>
 </p>
 
 <p align="center">
@@ -26,11 +26,9 @@
 </p>
 
 <p align="center">
-  <img src="cards/99-contributions.svg" alt="GitHub contribution graph in forest green and jade" width="100%" />
+  <img src="cards/99-contributions.svg" alt="Animated GitHub contribution calendar in violet and indigo" width="100%" />
 </p>
 
----
-
 <p align="center">
-  <sub>Warm paper, forest and jade palette · Updated daily by GitHub Actions</sub>
+  <sub>Designed in midnight violet · refreshed daily by GitHub Actions</sub>
 </p>
