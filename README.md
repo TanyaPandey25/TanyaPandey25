@@ -1,32 +1,32 @@
 <!-- Dark editorial / glassmorphic profile README. Each image is a self-contained SVG. -->
 <p align="center">
-  <img src="cards/01-hero.svg" alt="Tanya Pandey — computer science developer profile" width="100%" />
+  <img src="cards/v2-01-hero.svg" alt="Tanya Pandey — computer science developer profile" width="100%" />
 </p>
 
 <p align="center">
-  <a href="https://github.com/TanyaPandey25"><img src="cards/02-github.svg" alt="GitHub — code and experiments" width="32.5%" /></a>
-  <a href="https://www.linkedin.com/in/tanyapandey-dev/"><img src="cards/02-linkedin.svg" alt="LinkedIn — connect" width="32.5%" /></a>
-  <a href="https://github.com/TanyaPandey25?tab=repositories"><img src="cards/02-projects.svg" alt="Projects — things I'm building" width="32.5%" /></a>
+  <a href="https://github.com/TanyaPandey25"><img src="cards/v2-02-github.svg" alt="GitHub — code and experiments" width="32.5%" /></a>
+  <a href="https://www.linkedin.com/in/tanyapandey-dev/"><img src="cards/v2-02-linkedin.svg" alt="LinkedIn — connect" width="32.5%" /></a>
+  <a href="https://github.com/TanyaPandey25?tab=repositories"><img src="cards/v2-02-projects.svg" alt="Projects — things I'm building" width="32.5%" /></a>
 </p>
 
 <p align="center">
-  <img src="cards/03-activity.svg" alt="Monthly contribution activity, streak, active days and busiest day" width="100%" />
+  <img src="cards/v2-03-activity.svg" alt="Monthly contribution activity, streak, active days and busiest day" width="100%" />
 </p>
 
 <p align="center">
-  <a href="https://github.com/TanyaPandey25/Civic-Lens"><img src="cards/04-project-01-civic-lens.svg" alt="Featured project: Civic-Lens" width="100%" /></a>
+  <a href="https://github.com/TanyaPandey25/Civic-Lens"><img src="cards/v2-04-project-01-civic-lens.svg" alt="Featured project: Civic-Lens" width="100%" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/TanyaPandey25/EcoSphere-AR"><img src="cards/04-project-02-ecosphere-ar.svg" alt="Featured project: EcoSphere-AR" width="100%" /></a>
+  <a href="https://github.com/TanyaPandey25/EcoSphere-AR"><img src="cards/v2-04-project-02-ecosphere-ar.svg" alt="Featured project: EcoSphere-AR" width="100%" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/TanyaPandey25/deadline-decoder"><img src="cards/04-project-03-deadline-decoder.svg" alt="Featured project: Deadline Decoder" width="100%" /></a>
+  <a href="https://github.com/TanyaPandey25/deadline-decoder"><img src="cards/v2-04-project-03-deadline-decoder.svg" alt="Featured project: Deadline Decoder" width="100%" /></a>
 </p>
 
 <p align="center">
-  <img src="cards/99-contributions.svg" alt="Animated GitHub contribution calendar in violet and indigo" width="100%" />
+  <img src="cards/v2-99-contributions.svg" alt="Animated GitHub contribution calendar in violet and indigo" width="100%" />
 </p>
 
 <p align="center">
