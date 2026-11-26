@@ -44,7 +44,7 @@ FONT_URLS = {
     "manrope": "https://raw.githubusercontent.com/google/fonts/main/ofl/manrope/Manrope%5Bwght%5D.ttf",
     "cormorant": "https://raw.githubusercontent.com/google/fonts/main/ofl/cormorantgaramond/CormorantGaramond%5Bwght%5D.ttf"
 }
-FONT_TEXT = "Tanya PandeyComputer Science undergraduate building thoughtful software across web AI and data.GITHUBLINKEDINPROJECTSCivic-LensEcoSphere-ARDeadline Decoder0123456789·—↗"
+FONT_TEXT = "".join(chr(i) for i in range(32, 127)) + "·—↗’–"
 def esc(x): return html.escape(str(x), quote=True)
 def read_data():
     if DATA_FILE.exists(): return json.loads(DATA_FILE.read_text(encoding="utf-8"))
@@ -164,26 +164,6 @@ def links(fd):
 <path d="M276 130 l18 0 l0 -18" fill="none" stroke="{accent}" stroke-width="2.2" stroke-linecap="round"/>
 '''
         write(f"v4-02-{slug}.svg",s)
-def analytics(data,fd):
-    c=CONFIG["colors"]; months=data.get("months",[])[-12:]; months=[{"label":"—","count":0}]*(12-len(months))+months
-    maximum=max([int(m.get("count",0)) for m in months]+[1])
-    s=start_svg(1100,430,"Contribution activity and developer statistics",2,fd)
-    s+=f'''<ellipse class="glow" cx="1000" cy="0" rx="170" ry="110" fill="#6738B8" opacity=".24" filter="url(#blur)"/>
-{panel(2,2,1096,426,26)}
-<text x="54" y="62" class="kicker">YOUR YEAR IN CODE</text>
-<text x="50" y="119" class="serif" font-size="58">Small steps. Real momentum.</text>
-<text x="56" y="171" font-size="16" font-weight="800" letter-spacing="2" fill="#B3B2CE">CONTRIBUTIONS PER MONTH</text>'''
-    for i,m in enumerate(months):
-        x=58+i*80; h=max(4,int(118*int(m.get("count",0))/maximum)); y=319-h
-        s+=f'''<rect x="{x}" y="200" width="48" height="119" rx="10" fill="#FFFFFF" fill-opacity=".055"/>
-<rect x="{x}" y="{y}" width="48" height="{h}" rx="10" fill="url(#accent)">
-{"" if STATIC else f'<animate class="smil" attributeName="height" from="0" to="{h}" dur=".85s" begin="{.35+i*.07:.2f}s" fill="freeze"/><animate class="smil" attributeName="y" from="319" to="{y}" dur=".85s" begin="{.35+i*.07:.2f}s" fill="freeze"/>'}</rect>
-<text x="{x+24}" y="348" text-anchor="middle" font-size="14" fill="#B3B2CE">{esc(m.get("label",""))}</text>'''
-    metrics=[("CURRENT STREAK",f'{int(data.get("streak",0))} days'),("ACTIVE DAYS",str(int(data.get("active_days",0)))),("BUSIEST DAY",str(data.get("busiest_day","—")))]
-    for i,(label,value) in enumerate(metrics):
-        x=58+i*340
-        s+=f'<text x="{x}" y="393" font-size="14" font-weight="800" letter-spacing="1.5" fill="#B3B2CE">{label}</text><text x="{x+190}" y="393" font-size="23" font-weight="800" fill="#F4F1FF">{esc(value)}</text>'
-    write("v4-03-activity.svg",s)
 def repo_card(repo,i,fd):
     accent=repo["accent"]; slug=re.sub("[^a-z0-9]+","-",repo["name"].lower()).strip("-")
     description=repo["description"]
