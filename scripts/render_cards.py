@@ -17,7 +17,7 @@ STATIC = os.getenv("STATIC", "0") == "1"
 CONFIG = {
     "name": "Tanya Pandey",
     "username": "TanyaPandey25",
-    "tagline": "Computer Science undergraduate building thoughtful software across web, AI and data.",
+    "tagline": "Computer science undergrad",
     "github": "https://github.com/TanyaPandey25",
     "linkedin": "https://www.linkedin.com/in/tanyapandey-dev/",
     "projects": "https://github.com/TanyaPandey25?tab=repositories",
@@ -121,28 +121,31 @@ def end_svg(): return "</g></svg>\n"
 def write(name,s):
     CARDS.mkdir(parents=True,exist_ok=True); (CARDS/name).write_text(s+end_svg(),encoding="utf-8")
 def hero(fd):
-    c=CONFIG["colors"]; s=start_svg(1100,390,"Tanya Pandey — developer profile",0,fd)
-    s+=f'''<ellipse class="glow" cx="910" cy="72" rx="190" ry="125" fill="#6535B7" opacity=".42" filter="url(#blur)"/>
-<ellipse class="glow" cx="760" cy="350" rx="170" ry="85" fill="#3456C8" opacity=".24" filter="url(#blur)"/>
-<path d="M690 0 C760 95 740 210 1100 260" fill="none" stroke="#9B6CFF" stroke-opacity=".22" stroke-width="1.5"/>
-<circle cx="900" cy="182" r="132" fill="none" stroke="#A77BFF" stroke-opacity=".34" stroke-width="1.2"/>
-<circle cx="900" cy="182" r="106" fill="#FFFFFF" fill-opacity=".035" stroke="url(#edge)" stroke-opacity=".7"/>
-<circle class="glow" cx="900" cy="182" r="82" fill="#7044B6" fill-opacity=".15" filter="url(#blur)"/>
-<text x="70" y="76" class="kicker">HELLO, WORLD  /  I'M</text>
-<text x="66" y="178" class="serif" font-size="94" font-weight="600" letter-spacing="-2">{esc(CONFIG['name'])}</text>
-<text x="72" y="232" class="body">{esc(CONFIG['tagline'])}</text>
-<rect x="72" y="282" width="210" height="48" rx="24" fill="url(#accent)" fill-opacity=".88"/>
-<text x="177" y="313" text-anchor="middle" font-size="15" font-weight="800" letter-spacing="2">BUILD  /  EXPLORE</text>
-<text x="72" y="362" class="small">BMSCE  ·  COMPUTER SCIENCE  ·  INDIA</text>
+    s=start_svg(1100,330,"Tanya Pandey — computer science undergrad",0,fd)
+    s+=f'''<ellipse class="glow" cx="930" cy="55" rx="205" ry="135" fill="#6535B7" opacity=".40" filter="url(#blur)"/>
+<ellipse class="glow" cx="780" cy="325" rx="190" ry="90" fill="#3456C8" opacity=".25" filter="url(#blur)"/>
+<path d="M710 0 C790 110 770 220 1100 260" fill="none" stroke="#9B6CFF" stroke-opacity=".2" stroke-width="1.5"/>
+<text x="70" y="92" class="serif" font-size="91" font-weight="600" letter-spacing="-2" clip-path="url(#nameClip)">{esc(CONFIG['name'])}</text>
+<defs><clipPath id="nameClip"><rect x="64" y="0" width="0" height="210">
+<animate attributeName="width" values="0;660;660;0;0" keyTimes="0;.40;.58;.94;1" dur="6.8s" repeatCount="indefinite"/>
+</rect></clipPath></defs>
+<rect x="66" y="25" width="4" height="82" rx="2" fill="#D9C5FF">
+<animate attributeName="x" values="66;710;710;66;66" keyTimes="0;.40;.58;.94;1" dur="6.8s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;.38;.40;.94;1" dur="6.8s" repeatCount="indefinite"/>
+</rect>
+<text x="74" y="158" font-size="25" font-weight="600" letter-spacing="2.2" fill="#D9D3F3">Computer science undergrad</text>
+<text x="74" y="218" class="small">BMSCE  ·  COMPUTER SCIENCE</text>
+<circle cx="935" cy="170" r="124" fill="none" stroke="#A77BFF" stroke-opacity=".25" stroke-width="1.2"/>
+<circle cx="935" cy="170" r="98" fill="#FFFFFF" fill-opacity=".025" stroke="url(#edge)" stroke-opacity=".55"/>
+<circle class="glow" cx="935" cy="170" r="74" fill="#7044B6" fill-opacity=".16" filter="url(#blur)"/>
+<text x="935" y="197" text-anchor="middle" class="serif" font-size="72" fill="#E5D7FF">TP</text>
 '''
     if CONFIG["portrait_url"]:
-        s+=f'<circle cx="900" cy="182" r="82" fill="#111329"/><image href="{esc(CONFIG["portrait_url"])}" x="818" y="100" width="164" height="164" preserveAspectRatio="xMidYMid slice" clip-path="circle(82px at 900px 182px)"/>'
-    else:
-        s+='<text x="900" y="211" text-anchor="middle" class="serif" font-size="76" fill="#E5D7FF">TP</text>'
-    write("v2-01-hero.svg",s)
+        s+=f'<circle cx="935" cy="170" r="74" fill="#111329"/><image href="{esc(CONFIG["portrait_url"])}" x="861" y="96" width="148" height="148" preserveAspectRatio="xMidYMid slice" clip-path="circle(74px at 935px 170px)"/>'
+    write("v3-01-hero.svg",s)
 def links(fd):
     tiles=[("github","GITHUB","Code & experiments","GH","#9B6CFF"),("linkedin","LINKEDIN","Let’s connect","in","#75C8F5"),("projects","PROJECTS","Things I’m building","↗","#D58AEF")]
-    for i,(slug,title,sub,mark,accent) in enumerate(tiles):
+    for slug,title,sub,mark,accent in tiles:
         s=start_svg(330,164,title,1,fd)
         s+=f'''<ellipse class="glow" cx="275" cy="10" rx="90" ry="70" fill="{accent}" opacity=".22" filter="url(#blur)"/>
 {panel(3,3,324,158,22)}
@@ -152,7 +155,7 @@ def links(fd):
 <text x="30" y="142" font-size="15" fill="#B3B2CE">{sub}</text>
 <path d="M276 130 l18 0 l0 -18" fill="none" stroke="{accent}" stroke-width="2.2" stroke-linecap="round"/>
 '''
-        write(f"v2-02-{slug}.svg",s)
+        write(f"v3-02-{slug}.svg",s)
 def analytics(data,fd):
     c=CONFIG["colors"]; months=data.get("months",[])[-12:]; months=[{"label":"—","count":0}]*(12-len(months))+months
     maximum=max([int(m.get("count",0)) for m in months]+[1])
@@ -174,52 +177,54 @@ def analytics(data,fd):
         s+=f'<text x="{x}" y="393" font-size="14" font-weight="800" letter-spacing="1.5" fill="#B3B2CE">{label}</text><text x="{x+190}" y="393" font-size="23" font-weight="800" fill="#F4F1FF">{esc(value)}</text>'
     write("v2-03-activity.svg",s)
 def repo_card(repo,i,fd):
-    c=repo["accent"]; slug=re.sub("[^a-z0-9]+","-",repo["name"].lower()).strip("-")
-    s=start_svg(1100,270,f'{repo["name"]} featured project',3+i,fd)
-    s+=f'''<ellipse class="glow" cx="990" cy="40" rx="180" ry="120" fill="{c}" opacity=".22" filter="url(#blur)"/>
-{panel(2,2,1096,266,25)}
-<text x="58" y="58" class="kicker">SELECTED WORK  /  {repo["index"]}</text>
-<text x="55" y="132" class="serif" font-size="58" font-weight="600">{esc(repo["name"])}</text>
-<text x="60" y="180" font-size="20" fill="#D0CDE5">{esc(repo["description"])}</text>
-<text x="60" y="226" font-size="16" font-weight="700" fill="#9F9DBD">{esc(repo["stack"])}</text>
-<rect x="890" y="174" width="150" height="52" rx="26" fill="{c}" fill-opacity=".17" stroke="{c}" stroke-opacity=".75"/>
-<text x="965" y="207" text-anchor="middle" font-size="16" font-weight="800" letter-spacing="1">EXPLORE  ↗</text>
+    accent=repo["accent"]; slug=re.sub("[^a-z0-9]+","-",repo["name"].lower()).strip("-")
+    description=repo["description"]
+    # Two deliberate lines keep descriptions clear and away from the project metadata.
+    words=description.split(); lines=["",""]
+    for word in words:
+        target=0 if len(lines[0])+len(word)+1<=76 else 1
+        lines[target]=(lines[target]+" "+word).strip()
+    s=start_svg(1100,260,f'{repo["name"]} project',3+i,fd)
+    s+=f'''<ellipse class="glow" cx="990" cy="40" rx="180" ry="120" fill="{accent}" opacity=".20" filter="url(#blur)"/>
+{panel(2,2,1096,256,25)}
+<text x="58" y="56" font-size="14" font-weight="800" letter-spacing="2.5" fill="#75C8F5">PROJECT  /  {repo["index"]}</text>
+<text x="55" y="126" class="serif" font-size="59" font-weight="600">{esc(repo["name"])}</text>
+<text x="60" y="171" font-size="19" fill="#D0CDE5">{esc(lines[0])}</text>
+<text x="60" y="198" font-size="19" fill="#D0CDE5">{esc(lines[1])}</text>
+<text x="60" y="235" font-size="15" font-weight="700" fill="#A9A6C8">{esc(repo["stack"])}</text>
 '''
-    write(f"v2-04-project-{i:02d}-{slug}.svg",s)
+    write(f"v3-04-project-{i:02d}-{slug}.svg",s)
 def contribution_graph(data,fd):
-    c=CONFIG["colors"]; weeks=data.get("weeks",[])
-    s=start_svg(1100,330,"Animated GitHub contribution calendar",6,fd)
-    s+=f'''<ellipse class="glow" cx="880" cy="40" rx="240" ry="120" fill="#5936B3" opacity=".22" filter="url(#blur)"/>
-{panel(2,2,1096,326,25)}
-<text x="55" y="60" class="kicker">THE CONTRIBUTION CONSTELLATION</text>
-<text x="52" y="112" class="serif" font-size="54">Every square tells a story.</text>
-<text x="1040" y="68" text-anchor="end" font-size="17" font-weight="700" fill="#C6C0E4">{int(data.get("total_contributions",0)):,} contributions · 12 months</text>'''
+    weeks=data.get("weeks",[])
+    s=start_svg(1100,300,"Animated GitHub contribution calendar",6,fd)
+    s+=f'''<ellipse class="glow" cx="880" cy="35" rx="240" ry="120" fill="#5936B3" opacity=".22" filter="url(#blur)"/>
+{panel(2,2,1096,296,25)}
+<text x="55" y="60" class="kicker">GITHUB CONTRIBUTIONS</text>
+<text x="52" y="112" class="serif" font-size="54">A year in squares.</text>
+<text x="1040" y="68" text-anchor="end" font-size="17" font-weight="700" fill="#C6C0E4">{int(data.get("total_contributions",0)):,} contributions</text>'''
     if weeks:
-        cell,gap,sx,sy=13,5,65,145
+        cell,gap,sx,sy=13,5,65,137
+        fills=["#24243D","#49316F","#68439D","#8B5DCE","#B28BFF"]
         for wi,week in enumerate(weeks[-53:]):
             for day in week:
                 wd=int(day.get("weekday",0)); count=int(day.get("count",0))
                 level=0 if count==0 else 1 if count<3 else 2 if count<6 else 3 if count<10 else 4
-                fills=["#24243D","#49316F","#68439D","#8B5DCE","#B28BFF"]
                 x=sx+wi*(cell+gap); y=sy+wd*(cell+gap)
                 if STATIC:
                     s+=f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="4" fill="{fills[level]}"><title>{esc(day.get("date",""))}: {count} contributions</title></rect>'
                 else:
-                    delay=(wi*7+wd)*.018
-                    s+=f'''<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="4" fill="{fills[level]}" opacity=".78">
+                    delay=wi*.075+wd*.035
+                    s+=f'''<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="4" fill="{fills[level]}" opacity=".08">
 <title>{esc(day.get("date",""))}: {count} contributions</title>
-<animate class="smil" attributeName="opacity" values=".38;1;.38" dur="4.8s" begin="{delay:.3f}s" repeatCount="indefinite"/>
+<animate class="smil" attributeName="opacity" values=".08;1;.55;1" keyTimes="0;.18;.68;1" dur="6.2s" begin="{delay:.3f}s" repeatCount="indefinite"/>
 </rect>'''
     else: s+='<text x="65" y="180" class="body">Contribution data will appear after the next refresh.</text>'
-    s+='<text x="65" y="294" font-size="14" fill="#B3B2CE">LESS</text>'
-    for i,fill in enumerate(["#24243D","#49316F","#68439D","#8B5DCE","#B28BFF"]): s+=f'<rect x="{120+i*22}" y="281" width="15" height="15" rx="4" fill="{fill}"/>'
-    s+='<text x="245" y="294" font-size="14" fill="#B3B2CE">MORE</text>'
-    write("v2-99-contributions.svg",s)
+    write("v3-99-contributions.svg",s)
 def main():
     parser=argparse.ArgumentParser(); parser.add_argument("--refresh",action="store_true"); args=parser.parse_args()
     data=refresh_data() if args.refresh else read_data(); fd=fonts()
     CARDS.mkdir(parents=True,exist_ok=True)
-    hero(fd); links(fd); analytics(data,fd)
+    hero(fd); links(fd)
     for i,repo in enumerate(CONFIG["repos"],1): repo_card(repo,i,fd)
     contribution_graph(data,fd)
     print(f"Rendered {len(list(CARDS.glob('*.svg')))} SVG cards in {CARDS}")
