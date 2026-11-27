@@ -30,10 +30,7 @@ text{font-family:Manrope,Arial,sans-serif;fill:var(--white)}
 <rect x="2" y="2" width="1096" height="296" rx="25" fill="#FFFFFF" fill-opacity=".045" stroke="url(#edge)" stroke-opacity=".56" stroke-width="1.5" filter="url(#glass)"/>
 <text x="55" y="60" class="kicker">GITHUB CONTRIBUTIONS</text>
 <text x="52" y="112" class="serif" font-size="54">A year in squares.</text>
-<text x="1040" y="68" text-anchor="end" font-size="17" font-weight="700" fill="#C6C0E4">81 contributions</text><rect x="65" y="209" width="13" height="13" rx="4" fill="#24243D" opacity=".08">
-<title>2025-11-27: 0 contributions</title>
-<animate class="smil" attributeName="opacity" values=".10;1;.52;1;.10" keyTimes="0;.22;.56;.82;1" dur="7.2s" begin="0.140s" repeatCount="indefinite"/>
-</rect><rect x="65" y="227" width="13" height="13" rx="4" fill="#24243D" opacity=".08">
+<text x="1040" y="68" text-anchor="end" font-size="17" font-weight="700" fill="#C6C0E4">81 contributions</text><rect x="65" y="227" width="13" height="13" rx="4" fill="#24243D" opacity=".08">
 <title>2025-11-28: 0 contributions</title>
 <animate class="smil" attributeName="opacity" values=".10;1;.52;1;.10" keyTimes="0;.22;.56;.82;1" dur="7.2s" begin="0.175s" repeatCount="indefinite"/>
 </rect><rect x="65" y="245" width="13" height="13" rx="4" fill="#24243D" opacity=".08">
@@ -1128,4 +1125,7 @@ text{font-family:Manrope,Arial,sans-serif;fill:var(--white)}
 </rect><rect x="1001" y="227" width="13" height="13" rx="4" fill="#B28BFF" opacity=".08">
 <title>2026-11-27: 13 contributions</title>
 <animate class="smil" attributeName="opacity" values=".10;1;.52;1;.10" keyTimes="0;.22;.56;.82;1" dur="7.2s" begin="4.075s" repeatCount="indefinite"/>
+</rect><rect x="1001" y="245" width="13" height="13" rx="4" fill="#24243D" opacity=".08">
+<title>2026-11-28: 0 contributions</title>
+<animate class="smil" attributeName="opacity" values=".10;1;.52;1;.10" keyTimes="0;.22;.56;.82;1" dur="7.2s" begin="4.110s" repeatCount="indefinite"/>
 </rect></g></svg>
