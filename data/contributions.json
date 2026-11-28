@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-27T09:43:17.996830+00:00",
-  "total_contributions": 81,
+  "generated_at": "2026-11-28T08:56:32.424305+00:00",
+  "total_contributions": 88,
   "months": [
     {
       "month": "2025-12",
@@ -60,22 +60,10 @@
     {
       "month": "2026-11",
       "label": "Nov",
-      "count": 39
+      "count": 46
     }
   ],
   "weeks": [
-    [
-      {
-        "date": "2025-11-28",
-        "count": 0,
-        "weekday": 5
-      },
-      {
-        "date": "2025-11-29",
-        "count": 0,
-        "weekday": 6
-      }
-    ],
     [
       {
         "date": "2025-11-30",
@@ -1991,17 +1979,24 @@
       },
       {
         "date": "2026-11-27",
-        "count": 13,
+        "count": 14,
         "weekday": 5
       },
       {
         "date": "2026-11-28",
-        "count": 0,
+        "count": 6,
         "weekday": 6
+      }
+    ],
+    [
+      {
+        "date": "2026-11-29",
+        "count": 0,
+        "weekday": 0
       }
     ]
   ],
-  "streak": 2,
-  "active_days": 21,
+  "streak": 3,
+  "active_days": 22,
   "busiest_day": "Saturday"
 }
